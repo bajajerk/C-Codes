@@ -1,0 +1,4 @@
+/private/var/folders/v2/d7pfxtnj7jj5wk__r9q_q6140000gp/T/AppTranslocation/A21CF42E-ED6F-4522-B609-CBE562746BF4/d/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/apurv/Desktop/C++code/Permutation of string"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/apurv/Desktop/C++code/Permutation of string/cmake-build-debug

@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+project(First_non_repeating_character_in_a_stream_)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(First_non_repeating_character_in_a_stream_ main.cpp)

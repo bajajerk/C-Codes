@@ -1,0 +1,3 @@
+/Users/apurv/Desktop/C++code/Game of Two Stacks /cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/apurv/Desktop/C++code/Game of Two Stacks /cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/apurv/Desktop/C++code/Game of Two Stacks /cmake-build-debug/CMakeFiles/Game_of_Two_Stacks_.dir

@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+project(char_nonRepeatingCharacter_string_str____)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(char_nonRepeatingCharacter_string_str____ main.cpp)

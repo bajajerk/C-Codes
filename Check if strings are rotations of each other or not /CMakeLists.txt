@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+project(Check_if_strings_are_rotations_of_each_other_or_not_)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(Check_if_strings_are_rotations_of_each_other_or_not_ main.cpp)

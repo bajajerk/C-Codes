@@ -1,0 +1,4 @@
+/private/var/folders/v2/d7pfxtnj7jj5wk__r9q_q6140000gp/T/AppTranslocation/686B3B40-5548-400E-8C7A-E57BDA2936C6/d/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/apurv/Desktop/C++code/Merge
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/apurv/Desktop/C++code/Merge/cmake-build-debug
