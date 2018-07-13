@@ -31,8 +31,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2522">
-              <caret line="605" column="31" selection-start-line="605" selection-start-column="31" selection-end-line="605" selection-end-column="31" />
+            <state relative-caret-position="355">
+              <caret line="866" lean-forward="true" selection-start-line="866" selection-end-line="866" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#101#113#0" expanded="true" />
@@ -52,6 +52,13 @@
       <find>level</find>
       <find>isNo</find>
       <find>left</find>
+      <find>bounda</find>
+      <find>even</find>
+      <find>node</find>
+      <find>new nod</find>
+      <find>sumTree</find>
+      <find>getSumTree</find>
+      <find>sumTreeMaker</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -102,7 +109,7 @@
   </component>
   <component name="RunManager" selected="Application.BinaryTreeUse">
     <configuration name="BinaryTreeUse" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="BinaryTreeUse" TARGET_NAME="BinaryTreeUse" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BinaryTreeUse" RUN_TARGET_NAME="BinaryTreeUse" />
-    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all" />
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="BinaryTreeUse" RUN_TARGET_NAME="BinaryTreeUse" EXPLICIT_BUILD_TARGET_NAME="all" />
     <list>
       <item itemvalue="Application.Build All" />
       <item itemvalue="Application.BinaryTreeUse" />
@@ -121,12 +128,13 @@
       <workItem from="1531160713958" duration="4204000" />
       <workItem from="1531173113151" duration="3671000" />
       <workItem from="1531205516072" duration="5790000" />
-      <workItem from="1531241256873" duration="5604000" />
+      <workItem from="1531241256873" duration="8331000" />
+      <workItem from="1531287910550" duration="13260000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19269000" />
+    <option name="totallyTimeSpent" value="35256000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -134,22 +142,22 @@
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32900944" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4965278" weight="0.32900944" />
       <window_info anchor="bottom" id="CMake" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.46226415" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50416666" side_tool="true" weight="0.32900944" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49583334" visible="true" weight="0.46226415" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +172,21 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9210">
+          <caret line="614" column="1" lean-forward="true" selection-start-line="614" selection-start-column="1" selection-end-line="614" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#101#113#0" expanded="true" />
+            <element signature="e#457#469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -214,8 +237,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2522">
-          <caret line="605" column="31" selection-start-line="605" selection-start-column="31" selection-end-line="605" selection-end-column="31" />
+        <state relative-caret-position="355">
+          <caret line="866" lean-forward="true" selection-start-line="866" selection-end-line="866" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#101#113#0" expanded="true" />

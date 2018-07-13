@@ -2,6 +2,7 @@
 #include<queue>
 #include <math.h>
 #include<vector>
+#include<map>
 using namespace std;
 template <typename T>
 class BinaryTreeNode {
@@ -27,6 +28,7 @@ public :
     int min;
     int max;
 };
+
 template <typename T>
 class node{
 public:
@@ -37,6 +39,20 @@ public:
         this->next=NULL;
     }
 };
+
+node<int> * reverseList(node <int> * head ){
+    if(head==NULL || head->next == NULL){
+        return head;
+    }
+    node <int> * temp = reverseList(head->next);
+    node<int> * tail = temp;
+    while(tail->next!=NULL){
+        tail = tail->next;
+    }
+    tail->next = head;
+    head->next = NULL;
+    return temp;
+}
 
 BinaryTreeNode<int>* takeInputLevelWise() {
     int rootData;
@@ -370,7 +386,6 @@ vector <node<int>*> createLLForEachLevel(BinaryTreeNode<int> *root) {
     BinaryTreeNode<int> * temp = NULL;
     pendingNodes.push(temp);
 
-//    node<int> *noddy = new node<int>(root->data);
     node<int> * head = NULL;
     node<int> * tail = NULL;
 
@@ -378,9 +393,8 @@ vector <node<int>*> createLLForEachLevel(BinaryTreeNode<int> *root) {
         BinaryTreeNode <int> * workOnMe = pendingNodes.front();
         pendingNodes.pop();
         if(workOnMe==NULL){
-
             tail->next = NULL;
-            cout<<head->data<<endl;
+//            cout<<head->data<<endl;
             ans.push_back(head);
             head = NULL;
             tail = NULL;
@@ -584,23 +598,277 @@ void SpecialOrderPrint(BinaryTreeNode<int> *root) {
 }
 
 
-int main() {
-   BinaryTreeNode<int> * root = takeInputLevelWise();
-//   SpecialOrderPrint(root);
-//    vector <node<int>*> ans  = createLLForEachLevel(root);
-//  for(int i=0;i<ans.size();i++) {
-//      node<int> *head = ans[i];
-//      while (head != NULL) {
-//          cout << head->data << " ";
-//          head = head->next;
-//      }
-//      cout<<endl;
-//  }
+int evenOddLevelDifference( BinaryTreeNode<int>*root){
+    int ans = 0;
+    int oddEven = 1;
 
 
-//        cout<<acs->size();
+    if(root==NULL){
+        return 0;
+    }
+    queue<BinaryTreeNode<int>*> pendingNodes;
+    vector<int> uptillToPrint;
+    pendingNodes.push(root);
+    BinaryTreeNode<int> * temp = NULL;
+    pendingNodes.push(temp);
+    while(!pendingNodes.empty()){
+        BinaryTreeNode <int> * workOnMe = pendingNodes.front();
+        pendingNodes.pop();
+        if(workOnMe==NULL){
+            if(oddEven%2!=0){
+                for(int i=0;i<uptillToPrint.size();i++){
+                    ans += uptillToPrint[i];
+                }
+                oddEven++;
+            }
 
-    return 0;
+            else if(oddEven%2==0){
+                for(int i=0;i<uptillToPrint.size();i++){
+                    ans -= uptillToPrint[i];
+                }
+                oddEven++;
+            }
+
+
+            uptillToPrint.clear();
+
+            if(pendingNodes.size()==0){
+                break;
+            }
+            BinaryTreeNode<int> * temp = NULL;
+            pendingNodes.push(temp);
+        }
+        else{
+            uptillToPrint.push_back(workOnMe->data);
+            if(workOnMe->left!=NULL){
+                pendingNodes.push(workOnMe->left);
+            }
+            if(workOnMe->right!=NULL){
+                pendingNodes.push(workOnMe->right);
+            }
+
+        }
+    }
+    return ans;
+
+}
+void printLeftSideForTopView(BinaryTreeNode<int> * root, vector<int> * leftTopView) {
+    if(root==NULL){
+        return;
+    }
+    leftTopView->push_back(root->data);
+    printLeftSideForTopView(root->left,leftTopView);
 }
 
-//1 2 3 4 5 7 -1 -1 -1 6 -1 -1 8 -1 -1 -1 -1
+
+void rightSideForTopView(BinaryTreeNode<int> * root) {
+    if(root==NULL){
+        return;
+    }
+    cout<<root->data<<" ";
+    rightSideForTopView(root->right);
+}
+
+
+
+void printTopView(BinaryTreeNode<int>*root){
+    cout<<root->data<<" ";
+    vector<int> *leftTopView = new vector<int>();
+    printLeftSideForTopView(root->left,leftTopView);
+    for(int i= 0;i < leftTopView->size();i++){
+        cout<<leftTopView->at(i)<<" ";
+    }
+
+    rightSideForTopView(root->right);
+//    cout<<leftTopView->size();
+
+}
+
+BinaryTreeNode<int> * sumTreeMaker(BinaryTreeNode<int> * root){
+    if(root->left==NULL && root->right==NULL){
+        root->data = 0;
+        return root;
+    }
+    else if(root->right!=NULL && root->left!=NULL){
+        root->data = root->left->data + root->right->data;
+        root->left = sumTreeMaker(root->left);
+        root->right = sumTreeMaker(root->right);
+        return root;
+    }
+    else if(root->left!=NULL){
+        root->data = root->left->data;
+        root->left = sumTreeMaker(root->left);
+        return root;
+    }
+    else if(root->right!=NULL){
+        root->data = root->right->data;
+        root->right = sumTreeMaker(root->right);
+        return root;
+    }
+}
+
+
+
+long long boundarySum = 0;
+void printLeftBoundaryForSum(BinaryTreeNode <int> * root){
+    if(root==NULL){
+        return;
+    }
+    if(root->left){
+        boundarySum+=root->data;
+        printLeftBoundaryForSum(root->left);
+
+    }
+    else if (root->right!=NULL){
+        boundarySum+=root->data;
+        printLeftBoundaryForSum(root->right);
+    }
+}
+void printLeavesForSum(BinaryTreeNode <int> * root){
+    if(root==NULL){
+        return;
+    }
+    if(root->right==NULL && root->left==NULL){
+        boundarySum+=root->data;
+        return;
+
+    }
+    printLeavesForSum(root->left);
+    printLeavesForSum(root->right);
+}
+
+void printRightBoundaryForSum(BinaryTreeNode <int> * root){
+
+    if(root) {
+
+        if (root->right != NULL) {
+            printRightBoundaryForSum(root->right);
+
+            boundarySum+=root->data;
+
+        } else if (root->left != NULL) {
+            printRightBoundaryForSum(root->left);
+            boundarySum+=root->data;
+
+        }
+    }
+
+}
+
+
+
+long long sumBoundaryNodes(BinaryTreeNode<int>*root) {
+
+    boundarySum+=root->data;
+    printLeftBoundaryForSum(root->left);
+    printLeavesForSum(root->left);
+    printLeavesForSum(root->right);
+
+    printRightBoundaryForSum(root->right);
+    return boundarySum;
+
+}
+
+
+bool checkXOR(BinaryTreeNode<int>*root) {
+    if(root->left==NULL && root->right == NULL){
+        return true;
+    }
+    if(root->data == root->left->data ^ root->right->data){
+        bool a  = checkXOR(root->left);
+        bool b = checkXOR(root->right);
+        return a && b;
+    }
+    else  if(root->data != root->left->data ^ root->right->data){
+        return false;
+    }
+}
+
+
+void fillMapForVerticalOrder(BinaryTreeNode<int> * root,int i, map<int, vector<int> > & mappy){
+    if(root==NULL){
+        return;
+    }
+    mappy[i].push_back(root->data);
+
+    fillMapForVerticalOrder(root->left,i-1,mappy);
+    fillMapForVerticalOrder(root->right,i+1,mappy);
+    return;
+}
+
+
+void verticalOrder(BinaryTreeNode<int> *root)
+{
+
+    map <int , vector<int> >  mappy ;
+    fillMapForVerticalOrder(root,0, mappy);
+    map<int, vector<int> > :: iterator it;
+    for (it=mappy.begin(); it!=mappy.end(); it++)
+    {
+        for (int i=0; i<it->second.size(); ++i)
+            cout << it->second[i] << " ";
+            cout << endl;
+    }
+    return;
+}
+
+vector<int> verticallyBelowNodes(BinaryTreeNode<int>*root) {
+    map <int , vector<int> >  mappy ;
+    fillMapForVerticalOrder(root,0, mappy);
+//    map<int, vector<int> > :: iterator it;
+    vector<int> ans = mappy[0];
+    vector<int> final;
+    for(int i=1;i<ans.size();i++){
+        final.push_back(ans[i]);
+    }
+    return final;
+
+}
+vector<int> vecOfPreoder;
+void TreePreorder(BinaryTreeNode<int>* root){
+    if(root==NULL){
+        return;
+    }
+    vecOfPreoder.push_back(root->data);
+    TreePreorder(root->left);
+    TreePreorder(root->right);
+}
+
+vector<int> sumTree(BinaryTreeNode<int>* root){
+
+    BinaryTreeNode<int> * getSumTree = sumTreeMaker(root);
+    TreePreorder(getSumTree);
+    return vecOfPreoder;
+}
+
+vector<int> vecOfPostorder;
+void TreepostOrder(BinaryTreeNode<int>* root){
+    if(root==NULL){
+        return;
+    }
+    TreepostOrder(root->left);
+    TreepostOrder(root->right);
+    vecOfPostorder.push_back(root->data);
+
+}
+
+int  postOrderSuccessor(BinaryTreeNode<int> * root, int x){
+    TreepostOrder(root);
+    for(int i=0;i<vecOfPostorder.size();i++){
+        if(vecOfPostorder[i] == x && i!=vecOfPostorder.size()-1){
+            return vecOfPostorder[i+1];
+        }
+    }
+    return -1;
+}
+
+
+//1 2 3 4 -1 5 6 -1 -1 -1 7 -1 8 9 -1 -1 101 2 3 4 -1 5 6 -1 -1 -1 7 -1 8 9 -1 -1 10
+
+int main() {
+    BinaryTreeNode<int> *root = takeInputLevelWise();
+
+    int kk = getDeepestLeftRootValue(root);
+    cout<<"Ans is  "<<kk;
+    return 0;
+}
