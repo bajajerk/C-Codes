@@ -1,0 +1,3 @@
+/Users/apurv/Desktop/C++code/Number Of Factors /cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/apurv/Desktop/C++code/Number Of Factors /cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/apurv/Desktop/C++code/Number Of Factors /cmake-build-debug/CMakeFiles/Number_Of_Factors_.dir

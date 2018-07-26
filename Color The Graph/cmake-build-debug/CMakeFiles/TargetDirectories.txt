@@ -1,0 +1,3 @@
+/Users/apurv/Desktop/C++code/Color The Graph/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/apurv/Desktop/C++code/Color The Graph/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/apurv/Desktop/C++code/Color The Graph/cmake-build-debug/CMakeFiles/Color_The_Graph.dir

@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/Merge_K_sorted_arrays_.dir/main.cpp.o  -o Merge_K_sorted_arrays_ 

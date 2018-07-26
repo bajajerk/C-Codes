@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/Numbers_of_length_N_and_value_less_than_K_.dir/main.cpp.o  -o Numbers_of_length_N_and_value_less_than_K_ 

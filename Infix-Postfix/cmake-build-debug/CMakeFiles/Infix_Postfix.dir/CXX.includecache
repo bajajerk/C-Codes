@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/apurv/Desktop/C++code/Infix-Postfix/main.cpp
+iostream
+-
+stack
+-
+map
+-
+vector
+-
+string
+-
+

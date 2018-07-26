@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+project(Numbers_of_length_N_and_value_less_than_K_)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(Numbers_of_length_N_and_value_less_than_K_ main.cpp)
