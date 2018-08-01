@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/apurv/Desktop/C++code/BinaryTreeUse/main.cpp" "/Users/apurv/Desktop/C++code/BinaryTreeUse/cmake-build-debug/CMakeFiles/BinaryTreeUse.dir/main.cpp.o"
+  "/Users/mayank/Desktop/C-Codes/BinaryTreeUse/main.cpp" "/Users/mayank/Desktop/C-Codes/BinaryTreeUse/cmake-build-debug/CMakeFiles/BinaryTreeUse.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

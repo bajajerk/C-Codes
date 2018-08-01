@@ -3,6 +3,7 @@
 #include <math.h>
 #include<vector>
 #include<map>
+#include<set>
 using namespace std;
 template <typename T>
 class BinaryTreeNode {
@@ -862,13 +863,109 @@ int  postOrderSuccessor(BinaryTreeNode<int> * root, int x){
     return -1;
 }
 
+int minLeafSum(BinaryTreeNode<int>* root)
+{
+    int sum= 0;
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    BinaryTreeNode<int> * nu = NULL;
+    q.push(nu);
+    while(!q.empty()){
+        BinaryTreeNode<int> * temp = q.front();
+        q.pop();
+
+        if(temp==NULL){
+            if(q.size()==0){
+                break;
+            }
+            BinaryTreeNode<int> * n2 =NULL;
+            q.push(n2);
+
+            continue;
+        }
+        // Node * r = temp->right;
+        if(temp->right==NULL && temp->left==NULL){
+            while(temp!=NULL){
+                if(temp->right==NULL && temp->left==NULL){
+                    sum+=temp->data;
+                }
+                temp = q.front();
+                q.pop();
+            }
+            return sum;
+
+        }
+        if(temp->left){
+             q.push(temp->left);
+        }
+
+        if(temp->right){
+             q.push(temp->right);
+        }
+    }
+    return sum;
+
+}
+
+
+int printKDistantfromLeaf(BinaryTreeNode<int>* root, int k){
+    queue<BinaryTreeNode<int> *> q;
+    vector< BinaryTreeNode<int> *> leaf;
+    q.push(root);
+    map< BinaryTreeNode<int>* , BinaryTreeNode<int> * > parent;
+    parent[root]  = NULL;
+    while(!q.empty()){
+        BinaryTreeNode<int> * temp = q.front();
+        q.pop();
+
+        if(temp->left){
+            q.push(temp->left);
+            parent[temp->left] = temp;
+        }
+
+        if(temp->right){
+            q.push(temp->right);
+            parent[temp->right] = temp;
+        }
+        if(!temp->right && !temp->left){
+            leaf.push_back(temp);
+        }
+    }
+    int ans = 0;
+//    cout<<leaf.size()<<endl;
+    set<BinaryTreeNode<int> * > saver;
+    for(int i=0;i<leaf.size();i++){
+        BinaryTreeNode<int> * curr = leaf[i];
+
+        int j;
+        for(j=1;j<=k;j++){
+            if(!curr){
+                break;
+            }
+            curr = parent[curr];
+        }
+//        cout<<"J"<<j<<endl;
+        if(curr){
+            int old = saver.size();
+            saver.insert(curr);
+            int now = saver.size();
+//            cout<<old<<" "<<now;
+            if(now>old) {
+                ans++;
+            }
+        }
+    }
+    return ans;
+}
+
+
 
 //1 2 3 4 -1 5 6 -1 -1 -1 7 -1 8 9 -1 -1 101 2 3 4 -1 5 6 -1 -1 -1 7 -1 8 9 -1 -1 10
 
 int main() {
     BinaryTreeNode<int> *root = takeInputLevelWise();
 
-    int kk = getDeepestLeftRootValue(root);
+    int kk = printKDistantfromLeaf(root,2);
     cout<<"Ans is  "<<kk;
     return 0;
 }
