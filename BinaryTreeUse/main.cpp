@@ -4,6 +4,9 @@
 #include<vector>
 #include<map>
 #include<set>
+#include<algorithm>
+#include<string>
+#include<set>
 using namespace std;
 template <typename T>
 class BinaryTreeNode {
@@ -505,6 +508,8 @@ void zigZagOrder(BinaryTreeNode<int> *root) {
 
 }
 
+
+
 //BinaryTreeNode<int>* buildTreePreInorderHelper(int *preorder, int preStart, int preEnd, int *inorder, int inStart, int inEnd){
 //    if(preStart> preEnd || inStart > inEnd){
 //        return NULL;
@@ -958,14 +963,401 @@ int printKDistantfromLeaf(BinaryTreeNode<int>* root, int k){
     return ans;
 }
 
+int maxDiff(BinaryTreeNode<int>  * root)
+{
+    if(!root){
+        return -1;
+    }
+
+    queue<BinaryTreeNode<int>  *>q;
+    q.push(root);
+    q.push(NULL);
+    int tempMax  = root->data;
+    vector <int> cont;
+    cont.push_back(root->data);
+    int ans = -99;
+    while(!q.empty()){
+        cout<<"hi";
+
+        BinaryTreeNode<int>  * current = q.front();
+        q.pop();
+        if(current==NULL && q.size()!=0){
+            q.push(NULL);
+            sort(cont.begin(),cont.end());
+            if(cont[cont.size()-1]>tempMax){
+                tempMax  = cont[cont.size()-1];
+            }
+            cont.clear();
+            // continue;
+        }
+        if(q.size()==0){
+            break;
+        }
+        if(tempMax-current->data > ans){
+            ans= tempMax-current->data;
+        }
+        cont.push_back(current->data);
+        if(root->left){
+            q.push(root->left);
+        }
+        if(root->right){
+            q.push(root->right);
+        }
+
+    }
+    return ans;
+}
+
+int lcaBinaryTree(BinaryTreeNode <int>* root , int n1, int n2){
+    if(!root){
+        return -1;
+    }
+    if(root->data==n1 || root->data==n2){
+        return root->data;
+    }
+    int l = -1;
+    if(root->left){
+        l = lcaBinaryTree(root->left ,n1,n2);
+    }
+    int r = -1;
+    if(root->right){
+        r = lcaBinaryTree(root->right ,n1,n2);
+    }
+    if(l==-1 && r!=-1 ){
+        return r;
+    }
+    if(l!=-1 && r==-1 ){
+        return l;
+    }
+    if(l==-1 && r==-1 ){
+        return -1;
+    }
+    if(l!=-1 && r!=-1 ){
+        return root->data;
+    }
+
+}
 
 
-//1 2 3 4 -1 5 6 -1 -1 -1 7 -1 8 9 -1 -1 101 2 3 4 -1 5 6 -1 -1 -1 7 -1 8 9 -1 -1 10
+
+int depth(BinaryTreeNode<int> * root, int element){
+    if(!root){
+        return -9999;
+    }
+
+    if(root->data==element){
+        return 0;
+    }
+//    int ans = -1000;
+    if(root->right){
+        int a  = 1+depth(root->right,element);
+        if(a>0){
+            return a;
+        }
+    }
+    if(root->left){
+        int a  = 1+depth(root->left,element);
+        if(a>0){
+            return a;
+        }
+    }
+    return -9999;
+//    return ans;
+}
+
+
+//1 2 3 4 5 6 7 -1 -1 -1 -1 -1 8 -1 -1 -1 -1
+
+int findDist(BinaryTreeNode<int>* root, int a, int b)
+{
+   int depth1 = depth(root,a);
+   int depth2 = depth(root,b);
+   int lcElement = lcaBinaryTree(root,a,b);
+   int repeatLength = depth(root,lcElement);
+    cout<<depth1<<endl<<depth2<<endl<<lcElement<<endl<<repeatLength;
+    return depth1+depth2-(2*(repeatLength));
+}
+
+BinaryTreeNode<int> * nearest(BinaryTreeNode<int> *root, int x, int y){
+    if(root->data > x && root->data <y){
+        return root;
+    }
+    else if (root->data > x && root->data >y){
+        return nearest(root->left,x,y);
+    }
+    else if (root->data < x && root->data < y){
+        return nearest(root->right,x,y);
+    }
+}
+
+int maxNodeInBetween(BinaryTreeNode<int> *temp, int x, int y, int maxxy){
+    if(temp->data==y) {
+        return maxxy;
+    }
+    else if(temp->data > y){
+        return maxNodeInBetween(temp->left,x,y,max(temp->data,maxxy));
+    }
+    else if(temp->data < y){
+        return maxNodeInBetween(temp->right,x,y,max(temp->data,maxxy));
+    }
+//    return maxNodeInBetween(temp->right,x,y);
+}
+
+
+int ans1 = 0;
+int done = 0;
+void help (BinaryTreeNode<int>*root, int k){
+    if(!root){
+        return;
+    }
+    help(root->left,k);
+    done++;
+    cout<<root->data<<" "<<done<<endl;
+    if(done<=k){
+        ans1+=root->data;
+        return;
+    }
+    help(root->right,k);
+
+}
+int ksmallestElementSum(BinaryTreeNode<int>*root, int k)
+{
+    help(root,k);
+    return ans1;
+}
+
+bool checkLeafLevel( BinaryTreeNode<int>*root){
+    int level = 1;
+    queue<BinaryTreeNode<int> * > q;
+    q.push(root);
+    q.push(NULL);
+    int tempLeaf = 0;
+    int allowed = 0;
+    while(!q.empty()){
+//        cout<<"hi";
+        BinaryTreeNode<int> * current = q.front();
+        q.pop();
+        if(current==NULL){
+            if(allowed>0 && tempLeaf==0){
+                return false;
+            }
+            if(tempLeaf>0){
+                allowed++;
+            }
+//            allowed++;
+            tempLeaf = 0;
+            if(q.size()==0){
+                break;
+            }
+            else{
+                q.push(NULL);
+            }
+            continue;
+        }
+        if(!current->right && !current->left){
+            tempLeaf ++;
+        }
+        if(current->left){
+            q.push(current->left);
+        }
+        if(current->right){
+            q.push(current->right);
+        }
+
+    }
+    return true;
+
+}
+
+BinaryTreeNode<int> * searchNode(BinaryTreeNode<int>* root,int data1){
+    if(!root){
+        return NULL;
+    }
+    if(root->data==data1){
+        return root;
+    }
+    if(root->left){
+        BinaryTreeNode <int> * l = searchNode(root->left,data1);
+        if(l!=NULL){
+            return l;
+        }
+    }
+    if(root->right){
+        BinaryTreeNode <int> * r = searchNode(root->right,data1);
+        if(r!=NULL){
+            return r;
+        }
+    }
+
+
+    else{
+        return NULL;
+    }
+}
+
+void printLeafLeftToRight(BinaryTreeNode<int> *root){
+    if(!root){
+        return;
+    }
+    if(!root->right && !root->left){
+        cout<<root->data<<" ";
+    }
+    printLeafLeftToRight(root->left);
+    printLeafLeftToRight(root->right);
+}
+
+
+void printLeafNodes(BinaryTreeNode<int>* root,int data1){
+    BinaryTreeNode<int> * nodd = searchNode(root,data1);
+//    cout<<nodd->data;
+//    return;
+
+    printLeafLeftToRight(nodd);
+}
+
+
+int maxInPath(BinaryTreeNode<int> * root,int data1, int maxxy){
+    if(root->data==data1){
+        return max(maxxy,root->data);
+    }
+    if(root->data > data1){
+        return maxInPath(root->left,data1,max(maxxy,root->data));
+    }
+    else if(root->data < data1){
+        return maxInPath(root->right,data1,max(maxxy,root->data));
+    }
+
+}
+
+int largestCommonAncestor(BinaryTreeNode<int>* root,int data1,int data2){
+    int commonAncestor = lcaBinaryTree(root,data1,data2);
+    cout<<commonAncestor<<endl;
+    return maxInPath(root,commonAncestor,-99);
+}
+
+
+void all(BinaryTreeNode<int> *root,vector<int> * v){
+    if(!root){
+        return;
+    }
+    v->push_back(root->data);
+    all(root->left,v);
+    all(root->right,v);
+}
+
+bool compare(int x , int y){
+    string a  = to_string(x);
+    string b = to_string(y);
+
+    int n1 = stoi(a + b);
+    int n2 = stoi(b+a);
+
+    if(n2>n1){
+        return false;
+    }
+}
+
+void findLargestNumber( BinaryTreeNode<int> *root){
+    vector<int> *fillIt = new vector<int>();
+    all(root,fillIt);
+//    for (int i = 0; i < fillIt->size(); i++) {
+//        cout<<fillIt->at(i)<<" ";
+//    }
+    int help[fillIt->size()];
+    for (int i = 0; i < fillIt->size(); i++) {
+        help[i]=fillIt->at(i);
+    }
+    sort(help, help +fillIt->size(), compare);
+    cout<<"Next"<<endl;
+    for (int i = 0; i < fillIt->size(); i++) {
+        cout<<help[i];
+    }
+}
+int maxPathSum = -999;
+vector<int> maxpathvector;
+
+void explorerForMaxPath(BinaryTreeNode<int> * root, int uptill,vector<int> path){
+    uptill+=root->data;
+    path.push_back(root->data);
+    if(!root->right && !root->left){
+        if(uptill>maxPathSum){
+            maxPathSum = uptill;
+            maxpathvector = path;
+        }
+        return;
+    }
+    if(root->right){
+        explorerForMaxPath(root->right,uptill,path);
+    }
+    if(root->left){
+        explorerForMaxPath(root->left,uptill,path);
+    }
+}
+
+void maxSumPath(BinaryTreeNode<int>* root){
+    vector<int> path;
+    explorerForMaxPath(root,0,path);
+    for(int i=0;i<maxpathvector.size();i++){
+        cout<<maxpathvector[i];
+    }
+
+}
+
+
+
+int maxWidth(BinaryTreeNode<int> *root) {
+    int maxxy = -99;
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    q.push(NULL);
+    while(!q.empty()){
+        BinaryTreeNode<int> * temp = q.front();
+        q.pop();
+
+        if(temp==NULL){
+            if(q.size()==0){
+                break;
+            }
+            int size = q.size();
+//            cout<<size<<" ";
+//            cout<<maxxy<<endl;
+            if(size > maxxy){
+//                cout<<"?";
+                maxxy = q.size();
+            }
+            BinaryTreeNode<int> * n2 =NULL;
+            q.push(n2);
+
+            continue;
+        }
+        if(temp->left){
+            q.push(temp->left);
+        }
+
+        if(temp->right){
+            q.push(temp->right);
+        }
+    }
+    return maxxy;
+
+}
+
+
+
+
 
 int main() {
-    BinaryTreeNode<int> *root = takeInputLevelWise();
+    set<int> s;
+    s.insert(1);
 
-    int kk = printKDistantfromLeaf(root,2);
-    cout<<"Ans is  "<<kk;
+
+    BinaryTreeNode<int> *root = takeInputLevelWise();
+    cout<<maxWidth(root);
+//    maxSumPath(root);
+
+//BinaryTreeNode<int> * ro = searchNode(root,3);
+//    cout<<longestIncreasingPath(root);
+//    cout << "Nearest Node is  " << root2->data<<endl;
+//    cout<<maxNodeInBetween(root2,1,6);
     return 0;
 }

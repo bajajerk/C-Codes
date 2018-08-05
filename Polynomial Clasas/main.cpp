@@ -25,6 +25,7 @@ public:
                 expanded[i] = degCoeff[i];
             }
             capacity*=2;
+            degCoeff = expanded;
         }
         degCoeff[degree] = coeff;
         return;

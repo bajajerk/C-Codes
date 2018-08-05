@@ -903,7 +903,30 @@ Node* removeNthFromEnd(Node* head, int k) {
     prv->next = temp->next;
     return head;
 }
+int selfCount(Node * head){
+    int count=1;
+    Node * temp = head;
+    while(temp!=head){
+        temp = temp->next;
+        count++;
+    }
+    return count;
 
+}
+int countNodesinLoop(Node *head)
+{
+     Node* slow  = head;
+    Node* fast  = head;
+    while(slow && fast && fast->next){
+        if(slow==fast){
+            break;
+        }
+        slow = slow->next;
+        fast = fast->next;
+    }
+    return selfCount(slow);
+
+}
 
 
 

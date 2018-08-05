@@ -1,3 +1,3 @@
-/Users/apurv/Desktop/C++code/Polynomial Clasas/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/apurv/Desktop/C++code/Polynomial Clasas/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/apurv/Desktop/C++code/Polynomial Clasas/cmake-build-debug/CMakeFiles/Polynomial_Clasas.dir
+/Users/mayank/Desktop/C-Codes/Polynomial Clasas/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/mayank/Desktop/C-Codes/Polynomial Clasas/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mayank/Desktop/C-Codes/Polynomial Clasas/cmake-build-debug/CMakeFiles/Polynomial_Clasas.dir

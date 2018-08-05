@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/apurv/Desktop/C++code/Polynomial Clasas/main.cpp" "/Users/apurv/Desktop/C++code/Polynomial Clasas/cmake-build-debug/CMakeFiles/Polynomial_Clasas.dir/main.cpp.o"
+  "/Users/mayank/Desktop/C-Codes/Polynomial Clasas/main.cpp" "/Users/mayank/Desktop/C-Codes/Polynomial Clasas/cmake-build-debug/CMakeFiles/Polynomial_Clasas.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
