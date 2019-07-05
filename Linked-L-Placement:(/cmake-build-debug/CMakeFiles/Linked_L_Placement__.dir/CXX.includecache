@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/mayankbajaj/Desktop/C-Codes/Linked-L-Placement:(/main.cpp
+iostream
+-
+map
+-
+vector
+-
+stack
+-
+
