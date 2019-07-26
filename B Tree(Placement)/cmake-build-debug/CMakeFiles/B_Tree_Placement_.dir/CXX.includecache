@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/mayankbajaj/Desktop/C-Codes/B Tree(Placement)/main.cpp
+iostream
+-
+queue
+-
+math.h
+-
+vector
+-
+map
+-
+set
+-
+algorithm
+-
+string
+-
+set
+-
+stack
+-
+algorithm
+-
+
