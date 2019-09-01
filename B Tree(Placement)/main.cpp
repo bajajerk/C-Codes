@@ -762,44 +762,151 @@ int getCount(BinaryTreeNode<int> *root, int low, int high) {
     return getCount(root->left, low, high) + getCount(root->right, low, high);
 }
 
-void fillArrayWithBst(BinaryTreeNode<int> *root, vector<int> & v){
+void fillArrayWithBst(BinaryTreeNode<int> *root, vector<int> &v) {
+    if (!root)
+        return;
+    fillArrayWithBst(root->left, v);
+    v.push_back(root->data);
+    fillArrayWithBst(root->right, v);
+}
+
+bool isPairPresent(BinaryTreeNode<int> *root, int sum) {
+    vector<int> v;
+    fillArrayWithBst(root, v);
+    cout << v.size();
+    return true;
+}
+
+void bstToVector(BinaryTreeNode<int> *root, vector<int> &v) {
+    if (!root)
+        return;
+    else {
+        bstToVector(root->left, v);
+        v.push_back(root->data);
+        return bstToVector(root->right, v);
+
+    }
+}
+
+void printCommonInBST(BinaryTreeNode<int> *root1, BinaryTreeNode<int> *root2) {
+
+    vector<int> v1, v2;
+    bstToVector(root1, v1);
+    bstToVector(root2, v2);
+
+    int i = 0, j = 0;
+    while (i < v1.size() && j < v2.size()) {
+        if (v1[i] == v2[j]) {
+            cout << v1[i]<< endl;
+            i++;
+            j++;
+        } else if (v1[i] < v2[j]) {
+            i++;
+        } else if (v1[i] > v2[j]) {
+            j++;
+        }
+    }
+}
+
+int distanceBetween2NodeInBSTHeightHelper(BinaryTreeNode<int> *root, int data){
+    if(root->data == data){
+        return 0;
+    }
+    else if(root->data> data){
+        return 1+distanceBetween2NodeInBSTHeightHelper(root->left, data);
+    }
+    else if(root->data< data){
+        return 1+distanceBetween2NodeInBSTHeightHelper(root->right, data);
+    }
+}
+
+int distanceBetween2NodeInBST(BinaryTreeNode<int> *root,int smaller,int larger)
+{
+    if(smaller< root->data && larger< root->data){
+        return distanceBetween2NodeInBST(root->left,smaller,larger);
+    }
+    else if(smaller> root->data && larger> root->data){
+        return distanceBetween2NodeInBST(root->right,smaller,larger);
+    }
+    else if(root->data > smaller && root->data < larger){
+        return distanceBetween2NodeInBSTHeightHelper(root,smaller) + distanceBetween2NodeInBSTHeightHelper(root,larger);
+    }
+    else if(root->data == smaller || root->data == larger){
+        if(root->data == smaller){
+            return distanceBetween2NodeInBSTHeightHelper(root,larger);
+        }
+        else if(root->data == larger){
+            return distanceBetween2NodeInBSTHeightHelper(root,smaller);
+        }
+    }
+}
+
+
+
+
+BinaryTreeNode<int> * makeBSTFromPreorder(vector<int> v){
+    int size = v.size();
+    if(size==0){
+        return NULL;
+    }
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(v[0]);
+    vector<int> leftVector, rightvector;
+    int i;
+    for( i=1;i<size;i++){
+        if(v[i]<v[0]){
+            leftVector.push_back(v[i]);
+        }
+    }
+
+    for(int j=leftVector.size()+1;j<v.size();j++){
+        rightvector.push_back(v[j]);
+    }
+
+    root->left = makeBSTFromPreorder(leftVector);
+    root->right = makeBSTFromPreorder(rightvector);
+    return root;
+}
+
+void printLeafNodesOfBst(BinaryTreeNode<int> *root){
     if(!root)
         return;
-    fillArrayWithBst(root->left,v);
-    v.push_back(root->data);
-    fillArrayWithBst(root->right,v);
+    if(!root->right && !root->left){
+        cout<<root->data<<" ";
+        return;
+    }
+
+    printLeafNodesOfBst(root->left);
+    printLeafNodesOfBst(root->right);
+
 }
-bool isPairPresent(BinaryTreeNode<int> *root,int sum)
+
+void leafNode(int preorder[], int n)
 {
-    vector<int>v;
-    fillArrayWithBst(root,v);
-    cout<<v.size();
-    return true;
+    vector<int> v;
+    for(int i=0;i<n;i++){
+        v.push_back(preorder[i]);
+    }
+    BinaryTreeNode<int> * root = makeBSTFromPreorder(v);
+    printLeafNodesOfBst(root);
 }
 
 int main() {
 
-    BinaryTreeNode<int> *root = takeInput();
-
-    cout << getCount(root, 1, 45);
-//    cout<<"done";
-//    BinaryTreeNode<int> *  root2= takeInput();
-
-
-
-
-//    printTree(m);
-//    cout<<endl;
-//    BinaryTreeNode<int> *  inv = invertTree(root);
-//    printLeftView(root);
-//    nodesPositionFromXis(root,0);
-//    deepestRightLeaf(root);
-//    cout<<deepestLeftNodeWhichIsLeftChildOfSomeNode(root);
-//    vector<int> a;
-//    a.push_back(12);
-//    timepass(a);
-//    cout<<a.size();
-
+    int n;
+    cin>>n;
+    vector<int> v;
+    for(int i =0;i<n;i++){
+        int m;
+        cin>>m;
+        v.push_back(m);
+    }
+    BinaryTreeNode<int> * ans = makeBSTFromPreorder(v);
+//    printLeafNodesOfBst(ans);
+print(ans);
+//    BinaryTreeNode<int> *root = takeInput();
+//    int a,b;
+//    cin>>a>>b;
+//    cout<<distanceBetween2(root,a,b);
 
     return 0;
 }
